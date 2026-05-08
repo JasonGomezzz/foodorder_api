@@ -1,6 +1,6 @@
 # 🍔 FoodOrder API
 
-API REST para gestión de restaurante: administración de menús y pedidos de clientes.
+API REST para la gestión de restaurante: administración de menús y pedidos de clientes.
 
 ## 🛠️ Tecnologías
 - Python 3.x
@@ -19,59 +19,105 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-## 📡 Endpoints
+## 📡 Endpoints disponibles
 
-### Platos
+### 🥘 Platos
+
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
 | GET | `/api/platos/` | Lista todos los platos |
-| POST | `/api/platos/` | Crea un plato |
-| PUT | `/api/platos/{id}/` | Actualiza un plato |
+| POST | `/api/platos/` | Crea un nuevo plato |
+| PUT | `/api/platos/{id}/` | Actualiza un plato existente |
 | DELETE | `/api/platos/{id}/` | Elimina un plato |
-| GET | `/api/platos/?search=postre` | Busca por nombre o categoría |
+| GET | `/api/platos/?search=postre` | Busca platos por nombre o categoría |
 
-### Pedidos
+### 🧾 Pedidos
+
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| GET | `/api/pedidos/` | Lista pedidos con platos anidados |
-| POST | `/api/pedidos/` | Crea un pedido |
-| PUT | `/api/pedidos/{id}/` | Actualiza un pedido |
+| GET | `/api/pedidos/` | Lista todos los pedidos con platos anidados |
+| POST | `/api/pedidos/` | Crea un nuevo pedido |
+| PUT | `/api/pedidos/{id}/` | Actualiza un pedido existente |
 | DELETE | `/api/pedidos/{id}/` | Elimina un pedido |
-| GET | `/api/pedidos/?search=pendiente` | Busca por estado |
+| GET | `/api/pedidos/?search=pendiente` | Busca pedidos por estado |
 
-## 📝 Ejemplos de uso
+---
 
-### Crear Plato
+## 📸 Evidencia de endpoints
+
+### ➕ 1. Crear Plato — POST /api/platos/
 ```json
-POST /api/platos/
 {
     "nombre": "Lomo Saltado",
     "precio": "25.00",
     "categoria": "principal"
 }
 ```
+![POST plato](screenshots/01_post_plato.png)
 
-### Crear Pedido
+---
+
+### 📃 2. Listar Platos — GET /api/platos/
+![GET platos](screenshots/02_get_platos.png)
+
+---
+
+### ✏️ 3. Editar Plato — PUT /api/platos/1/
 ```json
-POST /api/pedidos/
+{
+    "nombre": "Lomo Saltado Especial",
+    "precio": "28.00",
+    "categoria": "principal"
+}
+```
+![PUT plato](screenshots/03_put_plato.png)
+
+---
+
+### 🔍 4. Buscar Plato — GET /api/platos/?search=postre
+![Search plato](screenshots/04_search_plato.png)
+
+---
+
+### ➕ 5. Crear Pedido — POST /api/pedidos/
+```json
 {
     "total": "30.00",
     "estado": "pendiente",
     "platos": [1, 2]
 }
 ```
+![POST pedido](screenshots/05_post_pedido.png)
 
-### Respuesta GET /api/pedidos/ (relación + punto extra)
+---
+
+### 📃 6. Listar Pedidos — GET /api/pedidos/
+Muestra la relación con los platos anidados **(punto extra ✨)**
+![GET pedidos](screenshots/06_get_pedidos.png)
+
+---
+
+### ✏️ 7. Editar Pedido — PUT /api/pedidos/1/
 ```json
 {
-    "id": 1,
-    "fecha": "2026-05-08T10:00:00Z",
-    "total": "30.00",
-    "estado": "pendiente",
-    "platos": [1, 2],
-    "platos_detalle": [
-        {"id": 1, "nombre": "Lomo Saltado Especial", "precio": "28.00", "categoria": "principal"},
-        {"id": 2, "nombre": "Inca Kola", "precio": "5.00", "categoria": "bebida"}
-    ]
+    "total": "45.00",
+    "estado": "en_proceso",
+    "platos": [1, 2, 3]
 }
 ```
+![PUT pedido](screenshots/07_put_pedido.png)
+
+---
+
+### 🔍 8. Buscar Pedido — GET /api/pedidos/?search=en_proceso
+![Search pedido](screenshots/08_search_pedido.png)
+
+---
+
+### ❌ 9. Eliminar Plato — DELETE /api/platos/3/
+![DELETE plato](screenshots/09_delete_plato.png)
+
+---
+
+### ❌ 10. Eliminar Pedido — DELETE /api/pedidos/1/
+![DELETE pedido](screenshots/10_delete_pedido.png)
